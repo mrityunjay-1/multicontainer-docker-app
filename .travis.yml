@@ -6,9 +6,9 @@ before_install:
   - docker build -t mrityunjay2docker/multi_container_app_client -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=false mrityunjay2docker/multi_container_app_client npm test -- --coverage
+  - docker run -e CI=true mrityunjay2docker/multi_container_app_client npm test -- --coverage
   
-after_install:
+after_success:
   - docker build -t mrityunjay2docker/multicontainer_docker_client ./client
   - docker build -t mrityunjay2docker/multicontainer_docker_nginx ./nginx
   - docker build -t mrityunjay2docker/multicontainer_docker_server ./server
