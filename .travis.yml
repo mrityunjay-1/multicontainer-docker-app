@@ -8,3 +8,17 @@ before_install:
 script:
   - docker run mrityunjay2docker/multi_container_app_client -e CI=true npm run test -- --coverage
   
+after_install:
+  - docker build -t mrityunjay2docker/multicontainer_docker_client ./client
+  - docker build -t mrityunjay2docker/multicontainer_docker_nginx ./nginx
+  - docker build -t mrityunjay2docker/multicontainer_docker_server ./server
+  - docker build -t mrityunjay2docker/multicontainer_docker_worker ./worker
+  
+  # docker login
+  - echo "#DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  
+  # pushing our images over to docker
+  - docker push mrityunjay2docker/multicontainer_docker_client
+  - docker push mrityunjay2docker/multicontainer_docker_nginx
+  - docker push mrityunjay2docker/multicontainer_docker_server
+  - docker push mrityunjay2docker/multicontainer_docker_worker
