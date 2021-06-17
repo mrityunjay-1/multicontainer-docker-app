@@ -5,19 +5,22 @@
       "name": "client",
       "image": "mrityunjay2docker/multicontainer_docker_client",
       "hostname": "client",
-      "essential": false
+      "essential": false,
+      "memory": 256
     },
     {
       "name": "server",
       "image": "mrityunjay2docker/multicontainer_docker_server",
       "hostname": "express_server",
-      "essential": false
+      "essential": false,
+      "memory": 256
     },
     {
       "name": "worker",
       "image": "mrityunjay2docker/multicontainer_docker_worker",
       "hostname": "worker",
-      "essential": false
+      "essential": false,
+      "memory": 256
     },
     {
       "name": "nginx",
@@ -30,7 +33,8 @@
           "containerPort": 80
         }
       ],
-      "links": ["client", "server"]
+      "links": ["client", "server"],
+      "memory": 256
     }
   ]
 }
