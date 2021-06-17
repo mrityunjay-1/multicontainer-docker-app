@@ -9,6 +9,8 @@ script:
   - docker run -e CI=true mrityunjay2docker/multi_container_app_client npm test -- --coverage
   
 after_success:
+
+    # building repositories and pushing it to the docker hub using following docker Images |
   - docker build -t mrityunjay2docker/multicontainer_docker_client ./client
   - docker build -t mrityunjay2docker/multicontainer_docker_nginx ./nginx
   - docker build -t mrityunjay2docker/multicontainer_docker_server ./server
@@ -22,3 +24,15 @@ after_success:
   - docker push mrityunjay2docker/multicontainer_docker_nginx
   - docker push mrityunjay2docker/multicontainer_docker_server
   - docker push mrityunjay2docker/multicontainer_docker_worker
+  
+  
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-south-1"
+  app: "multicontainer_docker_app1"
+  env: "Multicontainerdockerapp1-env"
+  bucket_name: "elasticbeanstalk-ap-south-1-202116681626"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY

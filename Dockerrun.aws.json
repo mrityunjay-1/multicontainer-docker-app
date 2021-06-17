@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunversion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "mrityunjay2docker/multicontainer_docker_client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "mrityunjay2docker/multicontainer_docker_server",
+      "hostname": "express_server",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "mrityunjay2docker/multicontainer_docker_worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "mrityunjay2docker/multicontainer_docker_nginx",
+      "hostname" : "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
