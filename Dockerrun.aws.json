@@ -11,7 +11,7 @@
     {
       "name": "server",
       "image": "mrityunjay2docker/multicontainer_docker_server",
-      "hostname": "express_server",
+      "hostname": "expressserver",
       "essential": false,
       "memory": 256
     },

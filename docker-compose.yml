@@ -33,7 +33,7 @@ services:
       - ./client:/app
       
 
-  express_server:
+  expressserver:
     restart: always
     build: 
       context: './server'
